@@ -8,11 +8,14 @@ function addBookToLibrary() {
     // do stuff here
 }
 
+const library = document.querySelector('.library')
+
 function listBooks () {
     myLibrary.forEach(item => {
         const div = document.createElement('div')
+        div.classList.add('book')
         div.textContent = item
-        document.body.appendChild(div)
+        library.appendChild(div)
     })
 }
 
