@@ -12,7 +12,7 @@
     <div class="library"></div>
     <div class="modal" id="modal">
         <div class="modal-header">
-            <div class="title">Book Inmodalation</div>
+            <div class="title">Book Information</div>
             <button data-close-button class="close-button">&times;</button>
         </div>
         <div class="modal-body">
@@ -22,9 +22,11 @@
             <input type="text" id="title">
             <label for="pages">Pages:</label>
             <input type="text" id="pages">
-            <label for="read">Already read?</label>
-            <input type="checkbox" id="read">
-            <button>Add to Library</button>
+            <div class="wrapper">
+                <label for="read">Already read?</label>
+                <input type="checkbox" id="read">
+            </div>
+            <button class="add-book">Add to Library</button>
         </div>
     </div>
     <div id="overlay"></div>

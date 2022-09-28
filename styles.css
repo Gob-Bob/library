@@ -22,7 +22,7 @@
     z-index: 10;
     background-color: white;
     width: 300px;
-    height: 200px;
+    height: 300px;
     max-width: 80%;
     border: none;
 }
@@ -54,6 +54,12 @@
 
 .modal-body {
     padding: 10px 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+.wrapper {
+    padding-bottom: 20px;
 }
 
 #overlay {
@@ -71,4 +77,10 @@
 #overlay.active {
     opacity: 1;
     pointer-events: all;
+}
+
+.add-book {
+    width: 100px;
+    display: flex;
+    align-self: center;
 }
