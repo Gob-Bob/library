@@ -1,7 +1,11 @@
 let myLibrary = ['Harry Potter', 'Goosebumps', 'Percey Jackson']
 
-function Book() {
+function Book(author, title, pages, read) {
     // the constructor...
+    this.author = author
+    this.title = title
+    this.pages = pages
+    this.read = read
 }
 
 function addBookToLibrary() {
