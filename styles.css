@@ -84,3 +84,14 @@
     display: flex;
     align-self: center;
 }
+
+.book-wrapper {
+    display: flex;
+    align-items: center;
+}
+.book-close-button {
+    height: 20px;
+    width: auto;
+    display: flex;
+    align-items: center;
+}

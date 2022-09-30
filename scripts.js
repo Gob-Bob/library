@@ -16,10 +16,19 @@ const library = document.querySelector('.library');
 
 function listBooks () {
     myLibrary.forEach(item => {
-        const div = document.createElement('div')
-        div.classList.add('book')
-        div.textContent = item
-        library.appendChild(div)
+        const bookWrapper = document.createElement('div')
+        bookWrapper.classList.add('book-wrapper')
+        library.appendChild(bookWrapper)
+
+        const book = document.createElement('div')
+        book.classList.add('book')
+        book.textContent = item
+        bookWrapper.appendChild(book)
+
+        const removeBookButton = document.createElement('button')
+        removeBookButton.classList.add('book-close-button')
+        removeBookButton.textContent = 'x'
+        bookWrapper.appendChild(removeBookButton)
     })
 }
 
