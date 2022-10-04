@@ -70,3 +70,23 @@ function closeModal(modal) {
     modal.classList.remove('active')
     overlay.classList.remove('active')
 }
+
+const form = document.getElementById('form')
+form.addEventListener('submit', function(event) {
+    event.preventDefault()
+
+    const author = document.getElementById('author').value
+    const title = document.getElementById('title').value
+    const pages = document.getElementById('pages').value
+    const read = document.getElementById('read').value
+
+    console.log(author)
+    console.log(title)
+    console.log(pages)
+    console.log(read)
+
+    document.getElementById('author').value = ''
+    document.getElementById('title').value = ''
+    document.getElementById('pages').value = ''
+    document.getElementById('read').value = 'off'
+})
