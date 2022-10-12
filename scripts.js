@@ -8,13 +8,34 @@ function Book(author, title, pages, read) {
     this.read = read
 }
 
-function addBookToLibrary() {
+function addBookToLibrary(book) {
     // do stuff here
+    myLibrary.push(book)
+}
+
+function removeBook(bookTitle) {
+    // Find index of book
+    bookIndex = myLibrary.indexOf(bookTitle)
+    // If index of book is found...
+    myLibrary.forEach((item, index) => {
+        if (index == bookIndex) {
+            // Remove from array
+            myLibrary.splice(index, 1)
+        }
+    })
 }
 
 const library = document.querySelector('.library');
 
+function resetLibrary() {
+    const libraryNode = document.getElementById('library')
+    while (libraryNode.firstChild) {
+        libraryNode.removeChild(libraryNode.lastChild)
+    }
+}
+
 function listBooks () {
+    resetLibrary()
     myLibrary.forEach(item => {
         const bookWrapper = document.createElement('div')
         bookWrapper.classList.add('book-wrapper')
@@ -28,6 +49,12 @@ function listBooks () {
         const removeBookButton = document.createElement('button')
         removeBookButton.classList.add('book-close-button')
         removeBookButton.textContent = 'x'
+        removeBookButton.addEventListener('click', () => {
+            bookWrapper.removeChild(book)
+            bookWrapper.removeChild(removeBookButton)
+            library.removeChild(bookWrapper)
+            console.log('Activated')
+        })
         bookWrapper.appendChild(removeBookButton)
     })
 }
@@ -78,15 +105,42 @@ form.addEventListener('submit', function(event) {
     const author = document.getElementById('author').value
     const title = document.getElementById('title').value
     const pages = document.getElementById('pages').value
-    const read = document.getElementById('read').value
+    const read = document.getElementById('read').checked
 
     console.log(author)
     console.log(title)
     console.log(pages)
     console.log(read)
 
+    const newBook = new Book(author, title, pages, read)
+    addBookToLibrary(newBook)
+
+    const bookWrapper = document.createElement('div')
+    bookWrapper.classList.add('book-wrapper')
+    library.appendChild(bookWrapper)
+
+    const book = document.createElement('div')
+    book.classList.add('book')
+    book.textContent = newBook.title
+    bookWrapper.appendChild(book)
+
+    const removeBookButton = document.createElement('button')
+    removeBookButton.classList.add('book-close-button')
+    removeBookButton.textContent = 'x'
+    removeBookButton.addEventListener('click', () => {
+        bookWrapper.removeChild(book)
+        bookWrapper.removeChild(removeBookButton)
+        library.removeChild(bookWrapper)
+        // removeBook(newBook.title)
+        // listBooks()
+    })
+    bookWrapper.appendChild(removeBookButton)
+
     document.getElementById('author').value = ''
     document.getElementById('title').value = ''
     document.getElementById('pages').value = ''
-    document.getElementById('read').value = 'off'
+    document.getElementById('read').checked = false
+
+
 })
+
