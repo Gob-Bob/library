@@ -25,6 +25,14 @@ function removeAllChildNodes(parent) {
     }
 }
 
+function removeFromLibary(title) {
+    myLibrary.forEach((item, index) => {
+        if (item.title == title) {
+            myLibrary.splice(index, 1)
+        }
+    })
+}
+
 function listBooks () {
     removeAllChildNodes(library)
     myLibrary.forEach(item => {
@@ -65,6 +73,7 @@ function listBooks () {
         removeBookButton.textContent = 'Remove'
         removeBookButton.addEventListener('click', () => {
             library.removeChild(bookWrapper)
+            removeFromLibary(item.title)
         })
         buttonWrapper.appendChild(removeBookButton)
     })
@@ -118,44 +127,13 @@ form.addEventListener('submit', function(event) {
     const pages = document.getElementById('pages').value
     const read = document.getElementById('read').checked
 
-    console.log(author)
-    console.log(title)
-    console.log(pages)
-    console.log(read)
-
     const newBook = new Book(author, title, pages, read)
     addBookToLibrary(newBook)
-
-    const bookWrapper = document.createElement('div')
-    bookWrapper.classList.add('book-wrapper')
-    library.appendChild(bookWrapper)
-
-    const bookTitle = document.createElement('div')
-    bookTitle.classList.add('book')
-    bookTitle.textContent = `Title: ${title}`
-    bookWrapper.appendChild(bookTitle)
-
-    const bookRead = document.createElement('div')
-    bookRead.classList.add('book')
-    bookRead.textContent = `Read: ${read}`
-    bookWrapper.appendChild(bookRead)
-
-    const removeBookButton = document.createElement('button')
-    removeBookButton.classList.add('book-close-button')
-    removeBookButton.textContent = 'x'
-    removeBookButton.addEventListener('click', () => {
-        bookWrapper.removeChild(bookTitle)
-        bookWrapper.removeChild(bookRead)
-        bookWrapper.removeChild(removeBookButton)
-        library.removeChild(bookWrapper)
-    })
-    bookWrapper.appendChild(removeBookButton)
+    listBooks()
 
     document.getElementById('author').value = ''
     document.getElementById('title').value = ''
     document.getElementById('pages').value = ''
     document.getElementById('read').checked = false
-
-
 })
 
