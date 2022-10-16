@@ -1,5 +1,3 @@
-let myLibrary = ['Harry Potter', 'Goosebumps', 'Percey Jackson']
-
 function Book(author, title, pages, read) {
     // the constructor...
     this.author = author
@@ -8,54 +6,67 @@ function Book(author, title, pages, read) {
     this.read = read
 }
 
+const harryPotterBook = new Book("J.K. Rowling", "Harry Potter", 800, true)
+const goosebumpsBook = new Book("R.L. Stein", "Goosebumps", 500, true)
+const perceyJacksonBook = new Book("Rick Riordan", "Percey Jackson", 600, false)
+
+let myLibrary = [harryPotterBook, goosebumpsBook, perceyJacksonBook]
+
 function addBookToLibrary(book) {
     // do stuff here
     myLibrary.push(book)
 }
 
-function removeBook(bookTitle) {
-    // Find index of book
-    bookIndex = myLibrary.indexOf(bookTitle)
-    // If index of book is found...
-    myLibrary.forEach((item, index) => {
-        if (index == bookIndex) {
-            // Remove from array
-            myLibrary.splice(index, 1)
-        }
-    })
-}
+const library = document.querySelector('.library')
 
-const library = document.querySelector('.library');
-
-function resetLibrary() {
-    const libraryNode = document.getElementById('library')
-    while (libraryNode.firstChild) {
-        libraryNode.removeChild(libraryNode.lastChild)
+function removeAllChildNodes(parent) {
+    while (parent.firstChild) {
+        parent.removeChild(parent.firstChild)
     }
 }
 
 function listBooks () {
-    resetLibrary()
+    removeAllChildNodes(library)
     myLibrary.forEach(item => {
         const bookWrapper = document.createElement('div')
         bookWrapper.classList.add('book-wrapper')
         library.appendChild(bookWrapper)
 
-        const book = document.createElement('div')
-        book.classList.add('book')
-        book.textContent = item
-        bookWrapper.appendChild(book)
+        const bookTitle = document.createElement('div')
+        bookTitle.classList.add('book')
+        bookTitle.textContent = `Title: ${item.title}`
+        bookWrapper.appendChild(bookTitle)
+
+        const bookRead = document.createElement('div')
+        bookRead.classList.add('book')
+        bookRead.textContent = `Read: ${item.read}`
+        bookWrapper.appendChild(bookRead)
+
+        const buttonWrapper = document.createElement('div')
+        buttonWrapper.classList.add('button-wrapper')
+        bookWrapper.appendChild(buttonWrapper)
+
+        const changeReadStatusButton = document.createElement('button')
+        changeReadStatusButton.classList.add('book-read-button')
+        changeReadStatusButton.textContent = 'Toggle Read Status'
+        changeReadStatusButton.addEventListener('click', () => {
+            if (item.read) {
+                item.read = false
+                listBooks()
+            } else {
+                item.read = true
+                listBooks()
+            }
+        })
+        buttonWrapper.appendChild(changeReadStatusButton)
 
         const removeBookButton = document.createElement('button')
         removeBookButton.classList.add('book-close-button')
-        removeBookButton.textContent = 'x'
+        removeBookButton.textContent = 'Remove'
         removeBookButton.addEventListener('click', () => {
-            bookWrapper.removeChild(book)
-            bookWrapper.removeChild(removeBookButton)
             library.removeChild(bookWrapper)
-            console.log('Activated')
         })
-        bookWrapper.appendChild(removeBookButton)
+        buttonWrapper.appendChild(removeBookButton)
     })
 }
 
@@ -119,20 +130,24 @@ form.addEventListener('submit', function(event) {
     bookWrapper.classList.add('book-wrapper')
     library.appendChild(bookWrapper)
 
-    const book = document.createElement('div')
-    book.classList.add('book')
-    book.textContent = newBook.title
-    bookWrapper.appendChild(book)
+    const bookTitle = document.createElement('div')
+    bookTitle.classList.add('book')
+    bookTitle.textContent = `Title: ${title}`
+    bookWrapper.appendChild(bookTitle)
+
+    const bookRead = document.createElement('div')
+    bookRead.classList.add('book')
+    bookRead.textContent = `Read: ${read}`
+    bookWrapper.appendChild(bookRead)
 
     const removeBookButton = document.createElement('button')
     removeBookButton.classList.add('book-close-button')
     removeBookButton.textContent = 'x'
     removeBookButton.addEventListener('click', () => {
-        bookWrapper.removeChild(book)
+        bookWrapper.removeChild(bookTitle)
+        bookWrapper.removeChild(bookRead)
         bookWrapper.removeChild(removeBookButton)
         library.removeChild(bookWrapper)
-        // removeBook(newBook.title)
-        // listBooks()
     })
     bookWrapper.appendChild(removeBookButton)
 

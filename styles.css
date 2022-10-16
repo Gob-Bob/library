@@ -2,12 +2,15 @@
     font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 
-.book {
+.book-wrapper {
+    display: flex;
+    flex-direction: column;
     border: 1px solid black;
     width: 150px;
     height: auto;
-    padding: 5px;
-    margin: 5px;
+    padding: 10px;
+    margin-top: 10px;
+    margin-bottom: 10px;
 }
 
 .modal {
@@ -85,13 +88,9 @@
     align-self: center;
 }
 
-.book-wrapper {
+.button-wrapper {
     display: flex;
-    align-items: center;
-}
-.book-close-button {
-    height: 20px;
-    width: auto;
-    display: flex;
-    align-items: center;
+    gap: 10px;
+    justify-content: end;
+    margin-top: 10px;
 }
